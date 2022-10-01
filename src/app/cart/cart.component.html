@@ -1,0 +1,36 @@
+<h3>Cart</h3>
+
+<div *ngIf="cartItems.length === 0">
+  <p>Your cart is empty</p>
+</div>
+
+<div class="cart-item" *ngFor="let cartItem of cartItems">
+  <span>{{ cartItem.name }}</span>
+  <span>{{ cartItem.price | currency }}</span>
+</div>
+
+<div *ngIf="cartItems.length > 0">
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" type="text" formControlName="name" />
+    </div>
+    <div>
+      <label for="address">Address</label>
+      <input id="address" type="text" formControlName="address" />
+    </div>
+    <button class="button" type="submit">
+      <i class="material-icons">shopping_cart</i>Purchase
+    </button>
+  </form>
+  <p>
+    <button (click)="clearCart()">
+      <i class="material-icons">delete</i>Clear cart
+    </button>
+  </p>
+</div>
+
+<p>
+  <a routerLink="/shipping">Shipping prices</a> &nbsp; &nbsp;
+  <a routerLink="/">Continue Shopping</a>
+</p>
